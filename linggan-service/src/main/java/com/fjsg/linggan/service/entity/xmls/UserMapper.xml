@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fjsg.linggan.service.entity.xmls.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.fjsg.linggan.service.entity.User">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+		<result column="mobile" property="mobile" jdbcType="BIGINT"/>
+		<result column="nickname" property="nickName" jdbcType="CHAR"/>
+		<result column="realName" property="realName" jdbcType="CHAR"/>
+		<result column="idCard" property="idCard" jdbcType="CHAR"/>
+		<result column="authStatus" property="authStatus" jdbcType="INTEGER"/>
+		<result column="portrait" property="portrait" jdbcType="CHAR"/>
+		<result column="description" property="description" jdbcType="VARCHAR"/>
+		<result column="gender" property="gender" jdbcType="INTEGER"/>
+		<result column="birthday" property="birthday" jdbcType="CHAR"/>
+		<result column="lastLoginTime" property="lastLoginTime" jdbcType="BIGINT"/>
+		<result column="createTime" property="createTime" jdbcType="BIGINT"/>
+		<result column="lastModified" property="lastModified" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, mobile, nickname, realName, idCard, authStatus, portrait, description, gender, birthday, lastLoginTime, createTime, lastModified
+    </sql>
+
+    <select id="get" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from lg_user
+        where ID = #{id, jdbcType=BIGINT}
+    </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        delete from lg_user
+        where ID = #{id, jdbcType=BIGINT}
+    </delete>
+
+    <insert id="save" parameterType="com.fjsg.linggan.service.entity.User">
+        <selectKey keyProperty="id" resultType="java.lang.Long">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into lg_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				id,
+			</if>
+			<if test="mobile != null">
+				mobile,
+			</if>
+			<if test="nickName != null">
+				nickName,
+			</if>
+			<if test="realName != null">
+				realName,
+			</if>
+			<if test="idCard != null">
+				idCard,
+			</if>
+			<if test="authStatus != null">
+				authStatus,
+			</if>
+			<if test="portrait != null">
+				portrait,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="gender != null">
+				gender,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="lastLoginTime != null">
+				lastLoginTime,
+			</if>
+			<if test="createTime != null">
+				createTime,
+			</if>
+			<if test="lastModified != null">
+				lastModified,
+			</if>
+			
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+				#{id, jdbcType=BIGINT},
+			</if>
+			<if test="mobile != null">
+				#{mobile, jdbcType=BIGINT},
+			</if>
+			<if test="nickName != null">
+				#{nickName, jdbcType=CHAR},
+			</if>
+			<if test="realName != null">
+				#{realName, jdbcType=CHAR},
+			</if>
+			<if test="idCard != null">
+				#{idCard, jdbcType=CHAR},
+			</if>
+			<if test="authStatus != null">
+				#{authStatus, jdbcType=INTEGER},
+			</if>
+			<if test="portrait != null">
+				#{portrait, jdbcType=CHAR},
+			</if>
+			<if test="description != null">
+				#{description, jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				#{gender, jdbcType=INTEGER},
+			</if>
+			<if test="birthday != null">
+				#{birthday, jdbcType=CHAR},
+			</if>
+			<if test="lastLoginTime != null">
+				#{lastLoginTime, jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				#{createTime, jdbcType=BIGINT},
+			</if>
+			<if test="lastModified != null">
+				#{lastModified, jdbcType=BIGINT},
+			</if>
+			
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.fjsg.linggan.service.entity.User">
+        update lg_user
+        <set>
+            <if test="id != null">
+				id = #{id, jdbcType=BIGINT},
+			</if>
+			<if test="mobile != null">
+				mobile = #{mobile, jdbcType=BIGINT},
+			</if>
+			<if test="nickName != null">
+				nickName = #{nickName, jdbcType=CHAR},
+			</if>
+			<if test="realName != null">
+				realName = #{realName, jdbcType=CHAR},
+			</if>
+			<if test="idCard != null">
+				idCard = #{idCard, jdbcType=CHAR},
+			</if>
+			<if test="authStatus != null">
+				authStatus = #{authStatus, jdbcType=INTEGER},
+			</if>
+			<if test="portrait != null">
+				portrait = #{portrait, jdbcType=CHAR},
+			</if>
+			<if test="description != null">
+				description = #{description, jdbcType=VARCHAR},
+			</if>
+			<if test="gender != null">
+				gender = #{gender, jdbcType=INTEGER},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday, jdbcType=CHAR},
+			</if>
+			<if test="lastLoginTime != null">
+				lastLoginTime = #{lastLoginTime, jdbcType=BIGINT},
+			</if>
+			<if test="createTime != null">
+				createTime = #{createTime, jdbcType=BIGINT},
+			</if>
+			<if test="lastModified != null">
+				lastModified = #{lastModified, jdbcType=BIGINT},
+			</if>
+			
+        </set>
+        where ID = #{id, jdbcType=BIGINT}
+    </update>
+
+	<select id="list" resultMap="BaseResultMap">
+		select * from lg_user
+		<where>
+			1 = 1
+			<if test="mobile != null">
+				AND mobile = #{mobile, jdbcType=BIGINT}
+			</if>
+		</where>
+		order by ID ASC
+	</select>
+
+</mapper>
