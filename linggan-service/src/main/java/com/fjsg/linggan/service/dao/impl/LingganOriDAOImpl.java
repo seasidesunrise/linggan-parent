@@ -4,33 +4,38 @@
  */
 package com.fjsg.linggan.service.dao.impl;
 
-import com.fjsg.linggan.service.dao.LingganDAO;
-import com.fjsg.linggan.service.entity.Linggan;
+import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-import java.util.Map;
+import com.fjsg.linggan.service.dao.LingganOriDAO;
+import com.fjsg.linggan.service.entity.Linggan;
 
 /**
  * @author zhaojun.wzj
  * @version $Id LingganDAOImpl.java, v 0.1 2017-07-28 18:36 zhaojun.wzj Exp $$
  */
-@Repository
-public class LingganDAOImpl implements LingganDAO {
+//@Repository
+public class LingganOriDAOImpl implements LingganOriDAO {
 
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
     @Override
     public Linggan get(Long id) {
-        return null;
+        Linggan linggan = sqlSessionTemplate
+            .selectOne("com.fjsg.linggan.service.entity.LingganMapper.get", id);
+        return linggan;
     }
 
     @Override
     public boolean delete(Long id) {
-        return false;
+        int rowCount = sqlSessionTemplate
+            .delete("com.fjsg.linggan.service.entity.LingganMapper.delete", id);
+        return rowCount > 0;
     }
 
     @Override
@@ -47,11 +52,17 @@ public class LingganDAOImpl implements LingganDAO {
 
     @Override
     public boolean update(Linggan linggan) {
-        return false;
+        int rowCount = sqlSessionTemplate
+            .update("com.fjsg.linggan.service.entity.LingganMapper.update", linggan);
+
+        return rowCount > 0;
     }
 
     @Override
     public List<Linggan> findListByMap(Map map) {
-        return null;
+        List<Linggan> result = sqlSessionTemplate
+            .selectList("com.fjsg.linggan.service.entity.LingganMapper.list", map);
+        return result;
     }
+
 }

@@ -7,7 +7,7 @@ package com.fjsg.linggan.service.manager.impl;
 import java.util.List;
 import java.util.Map;
 
-import com.fjsg.linggan.service.dao.LingganDAO;
+import com.fjsg.linggan.service.dao.LingganOriDAO;
 import com.fjsg.linggan.service.entity.Linggan;
 import com.fjsg.linggan.service.manager.LingganManager;
 
@@ -18,7 +18,7 @@ import com.fjsg.linggan.service.manager.LingganManager;
 public class LingganManagerImpl implements LingganManager {
 
     /** lingganDAO */
-    private LingganDAO lingganDAO;
+    private LingganOriDAO lingganDAO;
 
     /**
      * @param id

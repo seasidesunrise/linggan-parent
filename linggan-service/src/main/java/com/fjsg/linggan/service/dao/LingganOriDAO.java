@@ -13,9 +13,9 @@ import com.fjsg.linggan.service.entity.Linggan;
  * 灵感对象数据访问抽象
  *
  * @author zhaojun.wzj
- * @version $Id LingganDAO.java, v 0.1 2017-07-28 17:54 zhaojun.wzj Exp $$
+ * @version $Id LingganOriDAO.java, v 0.1 2017-07-28 17:54 zhaojun.wzj Exp $$
  */
-public interface LingganDAO {
+public interface LingganOriDAO {
 
     /**
      *

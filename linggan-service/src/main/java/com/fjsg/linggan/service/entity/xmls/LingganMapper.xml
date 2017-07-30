@@ -26,9 +26,21 @@
         <result column="lastModified" property="lastModified" jdbcType="BIGINT"/>
     </resultMap>
 
-    <select id="get" parameterType="java.lang.Long">
-        select * from lg_linggan where id=#{id}
+    <sql id="Base_Column_List">
+        id, userId, content, contentType, createTime, lastModified
+    </sql>
+
+    <select id="get" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM lg_linggan
+        WHERE id=#{id}
     </select>
+
+    <delete id="delete" parameterType="java.lang.Long">
+        DELETE FROM lg_linggan
+        WHERE ID = #{id, jdbcType=BIGINT}
+    </delete>
 
     <insert id="save" parameterType="com.fjsg.linggan.service.entity.Linggan">
         <selectKey keyProperty="id" resultType="java.lang.Long">
@@ -78,5 +90,40 @@
         </trim>
     </insert>
 
+    <update id="update" parameterType="com.fjsg.linggan.service.entity.Linggan">
+        UPDATE lg_linggan
+        <set>
+            <if test="id != null">
+                ID = #{id, jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                userId = #{userId, jdbcType=CHAR},
+            </if>
+            <if test="content != null">
+                content = #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="contentType != null">
+                contentType = #{contentType, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime, jdbcType=BIGINT},
+            </if>
+            <if test="lastModified != null">
+                lastModified = #{lastModified, jdbcType=BIGINT},
+            </if>
+        </set>
+        where ID = #{id, jdbcType=BIGINT}
+    </update>
+
+    <select id="list" resultMap="BaseResultMap">
+        select * from lg_linggan
+        <where>
+            1 = 1
+            <if test="userId != null">
+                AND userId = #{userId, jdbcType=CHAR}
+            </if>
+        </where>
+        order by ID ASC
+    </select>
 
 </mapper>
