@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+       Copyright 2010-2016 the original author or authors.
+       Licensed under the Apache License, Version 2.0 (the "License");
+       you may not use this file except in compliance with the License.
+       You may obtain a copy of the License at
+          http://www.apache.org/licenses/LICENSE-2.0
+       Unless required by applicable law or agreed to in writing, software
+       distributed under the License is distributed on an "AS IS" BASIS,
+       WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+       See the License for the specific language governing permissions and
+       limitations under the License.
+-->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fjsg.linggan.service.entity.LingganMapper">
+
+    <resultMap id="BaseResultMap" type="com.fjsg.linggan.service.entity.Linggan">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="userId" property="userId" jdbcType="CHAR"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="contentType" property="contentType" jdbcType="INTEGER"/>
+        <result column="createTime" property="createTime" jdbcType="BIGINT"/>
+        <result column="lastModified" property="lastModified" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <select id="get" parameterType="java.lang.Long">
+        select * from lg_linggan where id=#{id}
+    </select>
+
+    <insert id="save" parameterType="com.fjsg.linggan.service.entity.Linggan">
+        <selectKey keyProperty="id" resultType="java.lang.Long">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into lg_linggan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                userId,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="contentType != null">
+                contentType,
+            </if>
+            <if test="createTime != null">
+                createTime,
+            </if>
+            <if test="lastModified != null">
+                lastModified,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id, jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId, jdbcType=CHAR},
+            </if>
+            <if test="content != null">
+                #{content, jdbcType=VARCHAR},
+            </if>
+            <if test="contentType != null">
+                #{contentType, jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime, jdbcType=BIGINT},
+            </if>
+            <if test="lastModified != null">
+                #{lastModified, jdbcType=BIGINT},
+            </if>
+
+        </trim>
+    </insert>
+
+
+</mapper>
